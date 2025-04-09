@@ -3,14 +3,16 @@ import React from 'react';
 import { useSoberData } from '@/context/SoberContext';
 import Header from '@/components/Header';
 import StatsCard from '@/components/StatsCard';
-import Calendar from '@/components/Calendar';
 import { 
   Trophy, 
   Clock, 
   Calendar as CalendarIcon, 
-  CalendarCheck
+  CalendarCheck,
+  CalendarPlus
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { Card, CardContent } from '@/components/ui/card';
 
 const Index = () => {
   const { currentStreak, bestStreak, totalMonths, totalYears, resetAllData } = useSoberData();
@@ -30,6 +32,7 @@ const Index = () => {
               unit="days" 
               icon={<Clock className="h-4 w-4" />} 
               description="Consecutive sober days"
+              size="large"
             />
             
             <StatsCard 
@@ -59,7 +62,15 @@ const Index = () => {
         </section>
         
         <section className="mb-8">
-          <Calendar />
+          <Link to="/calendar">
+            <Card className="hover:bg-accent transition-colors cursor-pointer">
+              <CardContent className="p-6 flex flex-col items-center justify-center gap-3">
+                <CalendarPlus className="h-8 w-8 text-primary" />
+                <h3 className="font-medium">View & Update Calendar</h3>
+                <p className="text-sm text-muted-foreground">Track your sobriety journey</p>
+              </CardContent>
+            </Card>
+          </Link>
         </section>
 
         <section className="text-center mt-12 mb-8">

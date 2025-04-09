@@ -1,0 +1,64 @@
+
+/* iOS-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* CSS for iOS devices */
+  body {
+    /* Prevent text size adjustments on orientation change */
+    -webkit-text-size-adjust: 100%;
+    /* Prevent font size increase on landscape mode */
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Improve button touch targets */
+  button, 
+  .button, 
+  [type="button"], 
+  [type="submit"] {
+    /* Eliminate the delay in handling touch events */
+    touch-action: manipulation;
+    /* Override the default blue highlight on iOS */
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Fix sticky hover effects on iOS */
+  @media (hover: hover) {
+    .hover\:bg-accent:hover {
+      @apply bg-accent;
+    }
+  }
+  
+  /* Improve scrolling experience */
+  .overflow-auto, 
+  .overflow-y-auto, 
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Fix notch and bottom safe areas */
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+  
+  /* Add safe area insets */
+  .safe-area-padding {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Fix for buttons */
+.calendar-day {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.day-indicator {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}

@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SoberProvider } from "./context/SoberContext";
 import Index from "./pages/Index";
+import CalendarPage from "./pages/CalendarPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/calendar" element={<CalendarPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
