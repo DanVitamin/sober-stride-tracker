@@ -42,14 +42,14 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
     if (differenceInDays(today, currentDate) > 0 && !record) {
       streakBroken = true;
     } 
-    // If the record exists but user wasn't sober, streak is broken
-    else if (record && record.status === 'not-sober') {
+    // If the record exists but user reset, streak is broken
+    else if (record && record.status === 'reset') {
       streakBroken = true;
     }
-    // Otherwise, either there's no record for today (which is fine) or they were sober
-    else if (!record || record.status === 'sober') {
-      // Only count past days or today with 'sober' status in streak
-      if (record?.status === 'sober' || differenceInDays(today, currentDate) === 0) {
+    // Otherwise, either there's no record for today (which is fine) or they marked it as zero
+    else if (!record || record.status === 'zero') {
+      // Only count past days or today with 'zero' status in streak
+      if (record?.status === 'zero' || differenceInDays(today, currentDate) === 0) {
         streak++;
       }
     }
@@ -78,7 +78,7 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
   for (let i = 0; i < chronologicalRecords.length; i++) {
     const record = chronologicalRecords[i];
     
-    if (record.status === 'sober') {
+    if (record.status === 'zero') {
       if (currentStrk === 0) {
         streakStartDate = new Date(record.date);
       }
