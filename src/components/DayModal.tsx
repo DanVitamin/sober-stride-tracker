@@ -9,9 +9,8 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { 
-  Check, 
   X, 
-  Calendar
+  Trash2
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { DayStatus, useSoberData } from '@/context/SoberContext';
@@ -30,6 +29,7 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
   const currentStatus = getDayStatus(date);
   const formattedDate = format(date, 'EEEE, MMMM d, yyyy');
   const isToday = format(new Date(), 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd');
+  const dateStr = format(date, 'yyyy-MM-dd');
 
   const handleSetStatus = (status: DayStatus) => {
     setDayStatus(date, status);
@@ -38,60 +38,61 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="border border-muted bg-background text-foreground">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <Calendar className="h-5 w-5" />
+          <DialogTitle className="flex items-center justify-between">
             <span>{formattedDate}</span>
-            {isToday && <span className="ml-2 text-xs bg-primary/20 text-primary px-2 py-1 rounded-full">Today</span>}
+            {isToday && <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full">Today</span>}
           </DialogTitle>
         </DialogHeader>
-        <div className="space-y-4 py-4">
-          <h3 className="text-center text-lg">Did you stay sober on this day?</h3>
-          <div className="grid grid-cols-2 gap-4">
-            <Button
-              onClick={() => handleSetStatus('sober')}
-              variant={currentStatus === 'sober' ? "default" : "outline"}
-              className={`h-24 flex flex-col gap-2 ${currentStatus === 'sober' ? 'border-2 border-primary' : ''}`}
-            >
-              <Check className="h-8 w-8" />
-              <span>Yes, I stayed sober</span>
-            </Button>
-            
-            <Button
-              onClick={() => handleSetStatus('not-sober')}
-              variant={currentStatus === 'not-sober' ? "destructive" : "outline"}
-              className={`h-24 flex flex-col gap-2 ${currentStatus === 'not-sober' ? 'border-2 border-destructive' : ''}`}
-            >
-              <X className="h-8 w-8" />
-              <span>No, I drank</span>
-            </Button>
-          </div>
-          
-          {currentStatus !== null && (
-            <p className="text-center text-sm text-muted-foreground">
-              Current status: {currentStatus === 'sober' ? 'Sober day ✓' : 'Not sober ✗'}
-            </p>
-          )}
-        </div>
-        <DialogFooter>
+        
+        <div className="flex justify-end items-center gap-2 mt-2">
           {currentStatus !== null && (
             <Button 
-              onClick={() => handleSetStatus(null)} 
+              onClick={() => handleSetStatus(null)}
               variant="outline"
-              className="w-full sm:w-auto"
+              size="icon"
+              className="p-2 hover:bg-primary/10 rounded-full text-destructive border border-destructive"
+              title="Remove entry"
             >
-              Clear Status
+              <Trash2 size={20} />
             </Button>
           )}
           <Button 
             onClick={onClose}
-            variant="secondary"
-            className="w-full sm:w-auto"
+            variant="ghost"
+            size="icon"
+            className="p-2 hover:bg-primary/10 rounded-full"
           >
-            Close
+            <X size={20} />
           </Button>
-        </DialogFooter>
+        </div>
+        
+        <div className="flex gap-4 mt-4">
+          <Button
+            onClick={() => handleSetStatus('zero')}
+            variant={currentStatus === 'zero' ? "outline" : "default"}
+            className={`flex-1 py-6 border-2 transition-all font-semibold rounded-lg
+              ${currentStatus === 'zero' 
+                ? 'border-primary bg-transparent text-primary' 
+                : 'border-primary bg-primary text-primary-foreground hover:bg-transparent hover:text-primary'
+              }`}
+          >
+            Zero Day
+          </Button>
+          
+          <Button
+            onClick={() => handleSetStatus('reset')}
+            variant={currentStatus === 'reset' ? "outline" : "destructive"}
+            className={`flex-1 py-6 border-2 transition-all font-semibold rounded-lg
+              ${currentStatus === 'reset' 
+                ? 'border-destructive bg-transparent text-destructive' 
+                : 'border-destructive bg-destructive text-destructive-foreground hover:bg-transparent hover:text-destructive'
+              }`}
+          >
+            Reset Day
+          </Button>
+        </div>
       </DialogContent>
     </Dialog>
   );

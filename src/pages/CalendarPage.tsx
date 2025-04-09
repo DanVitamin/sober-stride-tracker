@@ -1,34 +1,38 @@
 
 import React from 'react';
-import Header from '@/components/Header';
 import Calendar from '@/components/Calendar';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const CalendarPage = () => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      
-      <main className="flex-grow container py-6 px-4 md:px-6 max-w-4xl mx-auto">
-        <div className="mb-6 flex items-center">
-          <Link to="/">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              <span>Back</span>
-            </Button>
-          </Link>
-          <h2 className="text-2xl font-bold ml-4">Your Calendar</h2>
+    <div className="min-h-screen bg-background text-foreground">
+      <nav className="border-b border-muted">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex justify-between h-16 items-center">
+            <Link to="/" className="text-2xl font-bold">
+              zero
+            </Link>
+            <Link to="/">
+              <button 
+                className="bg-primary text-primary-foreground px-6 py-2.5 rounded-full 
+                  hover:bg-transparent hover:text-primary border-2 border-primary 
+                  transition-all font-semibold"
+              >
+                View Progress
+              </button>
+            </Link>
+          </div>
         </div>
-        
-        <section className="mb-8">
+      </nav>
+
+      <div className="max-w-4xl mx-auto py-8 px-4">
+        <section>
           <Calendar />
         </section>
-      </main>
+      </div>
       
-      <footer className="py-4 text-center text-sm text-muted-foreground border-t">
-        <p>&copy; {new Date().getFullYear()} Sober Stride Tracker</p>
+      <footer className="py-4 text-center text-sm text-muted-foreground border-t border-muted">
+        <p>&copy; {new Date().getFullYear()} Zero Tracker</p>
       </footer>
     </div>
   );

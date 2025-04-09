@@ -1,5 +1,5 @@
 
-export type DayStatus = 'sober' | 'not-sober' | null;
+export type DayStatus = 'zero' | 'reset' | null;
 
 export interface DayRecord {
   date: string; // ISO string format
