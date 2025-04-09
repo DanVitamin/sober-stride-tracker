@@ -67,28 +67,53 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
   // Calculate best streak
   let bestStrk = 0;
   let currentStrk = 0;
-  let streakStartDate: Date | null = null;
-  let longestStreakStartDate: Date | null = null;
   
   // Sort by date (oldest first for this calculation)
   const chronologicalRecords = [...dayRecords].sort((a, b) => {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
   
+  // Track streak start dates
+  let streakStartDate: Date | null = null;
+  let longestStreakStartDate: Date | null = null;
+  let longestStreakEndDate: Date | null = null;
+
+  // We need to handle consecutive days properly
   for (let i = 0; i < chronologicalRecords.length; i++) {
     const record = chronologicalRecords[i];
+    const recordDate = new Date(record.date);
     
     if (record.status === 'zero') {
+      // First day of potential streak
       if (currentStrk === 0) {
-        streakStartDate = new Date(record.date);
+        streakStartDate = recordDate;
+      } else if (currentStrk > 0) {
+        // Check if this day is consecutive with the previous day
+        const prevDate = new Date(chronologicalRecords[i - 1].date);
+        const dayDiff = differenceInDays(recordDate, prevDate);
+        
+        // If days aren't consecutive, start a new streak
+        if (dayDiff > 1) {
+          currentStrk = 1;
+          streakStartDate = recordDate;
+        } else {
+          // Consecutive day, continue streak
+          currentStrk++;
+        }
+      } else {
+        // First day of streak
+        currentStrk = 1;
+        streakStartDate = recordDate;
       }
-      currentStrk++;
       
+      // Update best streak if current one is better
       if (currentStrk > bestStrk) {
         bestStrk = currentStrk;
         longestStreakStartDate = streakStartDate;
+        longestStreakEndDate = recordDate;
       }
-    } else {
+    } else if (record.status === 'reset') {
+      // Reset days break streaks
       currentStrk = 0;
       streakStartDate = null;
     }
@@ -100,15 +125,15 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
     // Calculate the start date of current streak
     const currentStreakStartDate = addDays(today, -streak + 1);
     longestStreakStartDate = currentStreakStartDate;
+    longestStreakEndDate = today;
   }
   
   // Calculate total months and years from the best streak
   let totalMonths = 0;
   let totalYears = 0;
-  if (longestStreakStartDate && bestStrk > 0) {
-    const endDate = new Date();
-    totalMonths = Math.floor(differenceInMonths(endDate, longestStreakStartDate));
-    totalYears = Math.floor(differenceInYears(endDate, longestStreakStartDate));
+  if (longestStreakStartDate && longestStreakEndDate && bestStrk > 0) {
+    totalMonths = Math.floor(differenceInMonths(longestStreakEndDate, longestStreakStartDate));
+    totalYears = Math.floor(differenceInYears(longestStreakEndDate, longestStreakStartDate));
   }
   
   return {
