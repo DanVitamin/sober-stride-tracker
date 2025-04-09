@@ -15,8 +15,10 @@ export const useSoberData = () => {
   return context;
 };
 
-export { DayStatus };
-export type { DayRecord };
+// Change from: export { DayStatus };
+// To: export type statements for TypeScript with isolatedModules
+export { DayStatus } from '@/types/soberTypes';
+export type { DayRecord } from '@/types/soberTypes';
 
 export const SoberProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Load initial data
