@@ -16,7 +16,6 @@ const CalendarPage = () => {
           <div className="flex justify-between h-16 items-center">
             <Link to="/" className="flex items-center gap-2">
               <Logo size="md" className="text-zero-text-primary" />
-              <span className="text-2xl font-bold">zero</span>
             </Link>
             <Link to="/">
               <button 
