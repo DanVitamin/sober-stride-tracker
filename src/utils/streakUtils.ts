@@ -24,9 +24,26 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 
+  // Check if the most recent day is a reset day
+  const mostRecentRecord = sortedRecords[0];
+  const mostRecentDate = new Date(mostRecentRecord.date);
+  const today = startOfDay(new Date());
+  
+  // If the most recent record is from today and is a reset, immediately return zero for current streak and totals
+  if (
+    differenceInDays(today, mostRecentDate) === 0 && 
+    mostRecentRecord.status === 'reset'
+  ) {
+    return {
+      currentStreak: 0,
+      bestStreak: calculateBestStreak(dayRecords), // Still calculate best streak from history
+      totalMonths: 0,
+      totalYears: 0
+    };
+  }
+
   // Calculate current streak by starting from today and walking backward
   let streak = 0;
-  const today = startOfDay(new Date());
   let currentDate = today;
   let streakBroken = false;
 
@@ -66,20 +83,50 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
     }
   }
   
-  // Calculate best streak
-  let bestStrk = 0;
-  let currentStrk = 0;
+  // If there's a reset day from today, streak should be 0
+  if (dayRecords.some(record => {
+    const recordDate = new Date(record.date);
+    return differenceInDays(today, recordDate) === 0 && record.status === 'reset';
+  })) {
+    streak = 0;
+  }
   
+  // Calculate best streak
+  const bestStrk = calculateBestStreak(dayRecords);
+
+  // Calculate total months and years 
+  // If there's a reset today, set these to 0
+  let totalZeroDays = dayRecords.filter(r => r.status === 'zero').length;
+  let totalMonths = Math.floor(totalZeroDays / 30);
+  let totalYears = Math.floor(totalZeroDays / 365);
+  
+  // If we have a reset day today, reset totals to 0
+  if (dayRecords.some(record => {
+    const recordDate = new Date(record.date);
+    return differenceInDays(today, recordDate) === 0 && record.status === 'reset';
+  })) {
+    totalMonths = 0;
+    totalYears = 0;
+  }
+  
+  return {
+    currentStreak: streak,
+    bestStreak: bestStrk,
+    totalMonths,
+    totalYears
+  };
+};
+
+// Helper function to calculate best streak
+function calculateBestStreak(dayRecords: DayRecord[]): number {
   // Sort by date (oldest first for this calculation)
   const chronologicalRecords = [...dayRecords].sort((a, b) => {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
   
-  // Track streak start dates
-  let streakStartDate: Date | null = null;
-  let longestStreakStartDate: Date | null = null;
-  let longestStreakEndDate: Date | null = null;
-
+  let bestStrk = 0;
+  let currentStrk = 0;
+  
   for (let i = 0; i < chronologicalRecords.length; i++) {
     const record = chronologicalRecords[i];
     const recordDate = new Date(record.date);
@@ -87,7 +134,6 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
     if (record.status === 'zero') {
       // First day of potential streak
       if (currentStrk === 0) {
-        streakStartDate = recordDate;
         currentStrk = 1;
       } else {
         // Check if this day is consecutive with the previous day
@@ -97,7 +143,6 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
         // If days aren't consecutive, start a new streak
         if (dayDiff > 1) {
           currentStrk = 1;
-          streakStartDate = recordDate;
         } else {
           // Consecutive day, continue streak
           currentStrk++;
@@ -107,33 +152,15 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
       // Update best streak if current one is better
       if (currentStrk > bestStrk) {
         bestStrk = currentStrk;
-        longestStreakStartDate = streakStartDate;
-        longestStreakEndDate = recordDate;
       }
     } else if (record.status === 'reset') {
       // Reset days break streaks
       currentStrk = 0;
-      streakStartDate = null;
     }
   }
   
-  // Important: Make sure we update the best streak at the end
-  if (currentStrk > bestStrk) {
-    bestStrk = currentStrk;
-  }
-  
-  // Calculate total months and years from zero days
-  let totalZeroDays = dayRecords.filter(r => r.status === 'zero').length;
-  let totalMonths = Math.floor(totalZeroDays / 30);
-  let totalYears = Math.floor(totalZeroDays / 365);
-  
-  return {
-    currentStreak: streak,
-    bestStreak: bestStrk,
-    totalMonths,
-    totalYears
-  };
-};
+  return bestStrk;
+}
 
 export const getDayStatus = (dayRecords: DayRecord[], date: Date): DayStatus => {
   const dateString = date.toISOString().split('T')[0];

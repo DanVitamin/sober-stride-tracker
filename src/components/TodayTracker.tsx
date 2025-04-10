@@ -5,14 +5,17 @@ import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 
 const TodayTracker: React.FC = () => {
-  const { getDayStatus, setDayStatus } = useSoberData();
+  const { getDayStatus, setDayStatus, currentStreak, totalMonths, totalYears } = useSoberData();
   const [loading, setLoading] = useState(false);
   const today = new Date();
   const currentStatus = getDayStatus(today);
   
   const handleSetStatus = (status: 'zero' | 'reset') => {
     setLoading(true);
+    
+    // Set the day status
     setDayStatus(today, status);
+    
     // Adding a small delay to show loading state for better feedback
     setTimeout(() => setLoading(false), 300);
   };
