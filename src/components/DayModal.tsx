@@ -51,7 +51,7 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
           onClick={() => handleSetStatus('zero')}
           className={`flex-1 py-5 transition-all font-medium rounded-lg ${
             currentStatus === 'zero'
-              ? 'bg-transparent border border-[#18C5ED] text-[#18C5ED]'
+              ? 'bg-[#16b3d7] text-black hover:bg-[#14a1c5]'
               : 'bg-[#18C5ED] text-black hover:bg-[#16b3d7]'
           }`}
         >
@@ -62,7 +62,7 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
           onClick={() => handleSetStatus('reset')}
           className={`flex-1 py-5 transition-all font-medium rounded-lg ${
             currentStatus === 'reset'
-              ? 'bg-transparent border border-[#FF0000] text-[#FF0000]'
+              ? 'bg-[#e60000] text-white hover:bg-[#cc0000]'
               : 'bg-[#FF0000] text-white hover:bg-[#e60000]'
           }`}
         >
