@@ -94,23 +94,23 @@ export default {
                 },
 				zero: {
 					bg: {
-						primary: '#0000ff', // Pure blue
-						secondary: '#0033cc', // Darker blue shade
-						dark: '#000099' // Even darker blue shade
+						primary: '#0000FF', // Primary blue
+						secondary: '#000099', // Darker blue shade
+						dark: '#000066' // Even darker blue shade
 					},
 					accent: {
-						primary: '#1EAEDB', // Brighter blue for calendar
-						reset: '#F97316' // Orange-red
+						primary: '#18C5ED', // Secondary blue (changed from #1EAEDB)
+						reset: '#FF0000' // Pure red (changed from #F97316)
 					},
 					text: {
-						primary: '#FFFFFF',
+						primary: '#FFFFFF', // White
 						secondary: 'rgba(255, 255, 255, 0.8)',
 						muted: 'rgba(255, 255, 255, 0.6)'
 					},
 					ui: {
-						card: 'rgba(0, 0, 255, 0.08)', // Simplified card background
-						border: 'rgba(255, 255, 255, 0.1)', // Reduced border opacity
-						hover: 'rgba(255, 255, 255, 0.15)' // Simplified hover state
+						card: 'rgba(0, 0, 255, 0.05)', // Even more simplified card background
+						border: 'rgba(255, 255, 255, 0.1)',
+						hover: 'rgba(255, 255, 255, 0.1)' // Reduced hover effect
 					}
 				},
 			},

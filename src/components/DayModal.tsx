@@ -29,7 +29,6 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
   const currentStatus = getDayStatus(date);
   const formattedDate = format(date, 'EEEE, MMMM d, yyyy');
   const isToday = format(new Date(), 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd');
-  const dateStr = format(date, 'yyyy-MM-dd');
 
   const handleSetStatus = (status: DayStatus) => {
     setDayStatus(date, status);
@@ -42,7 +41,7 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between">
             <span>{formattedDate}</span>
-            {isToday && <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">Today</span>}
+            {isToday && <span className="text-xs px-2 py-0.5 rounded-full bg-zero-accent-primary text-black">Today</span>}
           </DialogTitle>
         </DialogHeader>
         
@@ -52,10 +51,10 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
               onClick={() => handleSetStatus(null)}
               variant="outline"
               size="icon"
-              className="p-2 rounded-full text-muted-foreground border-muted"
+              className="p-2 rounded-full text-muted-foreground"
               title="Remove entry"
             >
-              <Trash2 size={20} />
+              <Trash2 size={18} />
             </Button>
           )}
           <Button 
@@ -64,31 +63,29 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
             size="icon"
             className="p-2 rounded-full"
           >
-            <X size={20} />
+            <X size={18} />
           </Button>
         </div>
         
         <div className="flex gap-4 mt-4">
           <Button
             onClick={() => handleSetStatus('zero')}
-            variant={currentStatus === 'zero' ? "outline" : "default"}
-            className={`flex-1 py-6 border transition-all font-semibold rounded-lg
-              ${currentStatus === 'zero' 
-                ? 'border-zero-accent-primary bg-transparent text-zero-accent-primary' 
-                : 'border-zero-accent-primary bg-zero-accent-primary text-white'
-              }`}
+            className={`flex-1 py-5 transition-all font-medium rounded-lg ${
+              currentStatus === 'zero'
+                ? 'bg-transparent border border-zero-accent-primary text-zero-accent-primary'
+                : 'bg-zero-accent-primary text-black hover:opacity-90'
+            }`}
           >
             Zero Day
           </Button>
           
           <Button
             onClick={() => handleSetStatus('reset')}
-            variant={currentStatus === 'reset' ? "outline" : "destructive"}
-            className={`flex-1 py-6 border transition-all font-semibold rounded-lg
-              ${currentStatus === 'reset' 
-                ? 'border-zero-accent-reset bg-transparent text-zero-accent-reset' 
-                : 'border-zero-accent-reset bg-zero-accent-reset text-white'
-              }`}
+            className={`flex-1 py-5 transition-all font-medium rounded-lg ${
+              currentStatus === 'reset'
+                ? 'bg-transparent border border-zero-accent-reset text-zero-accent-reset'
+                : 'bg-zero-accent-reset text-white hover:opacity-90'
+            }`}
           >
             Reset Day
           </Button>

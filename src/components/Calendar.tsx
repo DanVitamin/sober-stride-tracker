@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ChevronLeft, ChevronRight, X, Trash2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { DayStatus, useSoberData } from '@/context/SoberContext';
 import DayModal from './DayModal';
 import {
@@ -22,7 +22,7 @@ const Calendar: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  const { getDayStatus, setDayStatus } = useSoberData();
+  const { getDayStatus } = useSoberData();
   
   const days = getCalendarDays(currentMonth);
   const dayLabels = getDayLabels();
@@ -46,11 +46,6 @@ const Calendar: React.FC = () => {
     setIsModalOpen(false);
   };
   
-  const handleRemoveEntry = (date: Date) => {
-    setDayStatus(date, null);
-    closeModal();
-  };
-  
   const getDayClass = (day: Date): string => {
     const status = getDayStatus(day);
     const isToday = isDateToday(day);
@@ -61,24 +56,24 @@ const Calendar: React.FC = () => {
       return "opacity-30";
     }
     
-    let classes = "w-full h-full aspect-square rounded-lg flex items-center justify-center font-medium border transition-all shadow-sm ";
+    let classes = "w-full h-full rounded-lg flex items-center justify-center transition-colors ";
     
     if (inFuture) {
-      classes += "border-zero-ui-border bg-opacity-20 text-zero-text-muted cursor-not-allowed ";
+      classes += "text-zero-text-muted cursor-not-allowed ";
     } else {
       if (status === 'zero') {
-        classes += "bg-zero-accent-primary text-zero-bg-primary border-zero-accent-primary hover:bg-zero-accent-primary/90 ";
+        classes += "bg-zero-accent-primary text-black ";
       } else if (status === 'reset') {
-        classes += "bg-zero-accent-reset text-zero-text-primary border-zero-accent-reset hover:bg-zero-accent-reset/90 ";
+        classes += "bg-zero-accent-reset text-white ";
       } else {
-        classes += "bg-zero-ui-card border-zero-ui-border text-zero-text-primary hover:bg-zero-ui-hover ";
+        classes += "bg-zero-ui-card hover:bg-zero-ui-hover ";
       }
       
       classes += "cursor-pointer ";
     }
     
     if (isToday) {
-      classes += "ring-2 ring-zero-text-primary ring-opacity-70 ";
+      classes += "ring-1 ring-white ";
     }
     
     return classes;
@@ -86,7 +81,7 @@ const Calendar: React.FC = () => {
 
   return (
     <div className="zero-card">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-6">
         <Button
           variant="ghost"
           size="icon"
@@ -96,7 +91,7 @@ const Calendar: React.FC = () => {
         >
           <ChevronLeft className="h-5 w-5" />
         </Button>
-        <span className="text-xl font-medium min-w-[140px] text-center">
+        <span className="text-xl font-medium">
           {formatMonthYear(currentMonth)}
         </span>
         <Button
@@ -123,7 +118,7 @@ const Calendar: React.FC = () => {
       </div>
       
       <CardContent className="p-0">
-        <div className="grid grid-cols-7 gap-2">
+        <div className="grid grid-cols-7 gap-1">
           {dayLabels.map((label) => (
             <div
               key={label}
@@ -133,7 +128,7 @@ const Calendar: React.FC = () => {
             </div>
           ))}
           
-          {days.map((day, index) => {
+          {days.map((day) => {
             const inCurrentMonth = isCurrentMonth(day, currentMonth);
             
             if (!inCurrentMonth) {
@@ -141,7 +136,7 @@ const Calendar: React.FC = () => {
             }
             
             return (
-              <div key={day.toString()} className="relative aspect-square">
+              <div key={day.toString()} className="aspect-square p-0.5">
                 <button 
                   onClick={() => handleDayClick(day)}
                   className={getDayClass(day)}
@@ -156,68 +151,11 @@ const Calendar: React.FC = () => {
         </div>
       </CardContent>
       
-      {/* Custom Modal instead of using DayModal component */}
-      {selectedDate && isModalOpen && (
-        <div className="mt-8 p-6 rounded-lg bg-zero-ui-hover border border-zero-ui-border shadow-lg">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-lg font-bold">
-              {selectedDate.toLocaleDateString('default', { 
-                weekday: 'long',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </h3>
-            <div className="flex items-center gap-2">
-              {getDayStatus(selectedDate) && (
-                <button 
-                  onClick={() => handleRemoveEntry(selectedDate)}
-                  className="p-2 hover:bg-zero-ui-hover rounded-full text-zero-accent-reset 
-                    border border-zero-accent-reset"
-                  title="Remove entry"
-                >
-                  <Trash2 size={20} />
-                </button>
-              )}
-              <button 
-                onClick={closeModal}
-                className="p-2 hover:bg-zero-ui-hover rounded-full"
-              >
-                <X size={20} />
-              </button>
-            </div>
-          </div>
-          
-          <div className="flex gap-4">
-            <button
-              onClick={() => {
-                setDayStatus(selectedDate, 'zero');
-                closeModal();
-              }}
-              className={`flex-1 py-3.5 rounded-lg font-semibold shadow-md transition-all
-                ${getDayStatus(selectedDate) === 'zero' 
-                  ? 'border-2 border-zero-accent-primary bg-transparent text-zero-accent-primary' 
-                  : 'bg-zero-accent-primary text-zero-bg-primary hover:bg-zero-accent-primary/90'
-                }`}
-            >
-              Zero Day
-            </button>
-            
-            <button
-              onClick={() => {
-                setDayStatus(selectedDate, 'reset');
-                closeModal();
-              }}
-              className={`flex-1 py-3.5 rounded-lg font-semibold shadow-md transition-all
-                ${getDayStatus(selectedDate) === 'reset'
-                  ? 'border-2 border-zero-accent-reset bg-transparent text-zero-accent-reset'
-                  : 'bg-zero-accent-reset text-zero-text-primary hover:bg-zero-accent-reset/90'
-                }`}
-            >
-              Reset Day
-            </button>
-          </div>
-        </div>
-      )}
+      <DayModal
+        date={selectedDate}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </div>
   );
 };
