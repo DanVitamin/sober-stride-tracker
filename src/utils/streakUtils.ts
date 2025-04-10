@@ -114,6 +114,12 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
       currentStrk = 0;
       streakStartDate = null;
     }
+    
+    // Add this check to ensure the best streak count is updated at the end
+    // This fixes the issue where the last entry might not be properly accounted for
+    if (i === chronologicalRecords.length - 1 && currentStrk > bestStrk) {
+      bestStrk = currentStrk;
+    }
   }
   
   // Calculate total months and years from zero days
