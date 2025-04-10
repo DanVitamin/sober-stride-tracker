@@ -35,10 +35,9 @@ const Index = () => {
             <Logo size="md" className="text-zero-text-primary" />
             <Link to="/calendar">
               <button 
-                className="flex items-center justify-center p-2 rounded-full transition-all 
-                  bg-zero-text-primary text-zero-bg-primary shadow-lg hover:opacity-90"
+                className="flex items-center justify-center transition-all hover:opacity-80"
               >
-                <Calendar size={isMobile ? 32 : 40} />
+                <Calendar size={isMobile ? 26 : 32} color="#FFFFFF" />
               </button>
             </Link>
           </div>
