@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 
 const TodayTracker: React.FC = () => {
-  const { getDayStatus, setDayStatus, currentStreak } = useSoberData();
+  const { getDayStatus, setDayStatus } = useSoberData();
   const [loading, setLoading] = useState(false);
   const today = new Date();
   const currentStatus = getDayStatus(today);
@@ -30,9 +30,6 @@ const TodayTracker: React.FC = () => {
             </span>
           </p>
         )}
-        <p className="text-center text-sm mt-2">
-          Current streak: <span className="font-medium">{currentStreak}</span> days
-        </p>
       </div>
       <div className="flex gap-4">
         <Button
