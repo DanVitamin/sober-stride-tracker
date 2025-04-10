@@ -62,11 +62,11 @@ const Calendar: React.FC = () => {
       classes += "text-zero-text-muted cursor-not-allowed ";
     } else {
       if (status === 'zero') {
-        classes += "bg-zero-accent-primary text-black ";
+        classes += "bg-white text-zero-bg-primary ";
       } else if (status === 'reset') {
         classes += "bg-zero-accent-reset text-white ";
       } else {
-        classes += "bg-zero-ui-card hover:bg-zero-ui-hover ";
+        classes += "bg-zero-ui-card text-white hover:bg-zero-ui-hover ";
       }
       
       classes += "cursor-pointer ";
@@ -108,7 +108,7 @@ const Calendar: React.FC = () => {
       {/* Calendar Legend */}
       <div className="flex gap-6 justify-center mb-6">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-zero-accent-primary"></div>
+          <div className="w-3 h-3 rounded-full bg-white"></div>
           <span className="text-sm text-zero-text-secondary">Zero Day</span>
         </div>
         <div className="flex items-center gap-2">
@@ -151,11 +151,13 @@ const Calendar: React.FC = () => {
         </div>
       </CardContent>
       
-      <DayModal
-        date={selectedDate}
-        isOpen={isModalOpen}
-        onClose={closeModal}
-      />
+      {selectedDate && (
+        <DayModal
+          date={selectedDate}
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };
