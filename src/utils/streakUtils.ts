@@ -52,7 +52,8 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
     }
     // For today with no record, we continue checking (no penalty for current day)
     else if (!record && differenceInDays(today, currentDate) === 0) {
-      // Don't count today unless it's marked as zero
+      // Today without a record doesn't break the streak, but also doesn't add to it
+      // We just move to the previous day
     }
     
     // Move to the previous day
@@ -114,12 +115,11 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
       currentStrk = 0;
       streakStartDate = null;
     }
-    
-    // Add this check to ensure the best streak count is updated at the end
-    // This fixes the issue where the last entry might not be properly accounted for
-    if (i === chronologicalRecords.length - 1 && currentStrk > bestStrk) {
-      bestStrk = currentStrk;
-    }
+  }
+  
+  // Important: Make sure we update the best streak at the end
+  if (currentStrk > bestStrk) {
+    bestStrk = currentStrk;
   }
   
   // Calculate total months and years from zero days

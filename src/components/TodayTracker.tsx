@@ -1,16 +1,20 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useSoberData } from '@/context/SoberContext';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 
 const TodayTracker: React.FC = () => {
-  const { getDayStatus, setDayStatus } = useSoberData();
+  const { getDayStatus, setDayStatus, currentStreak } = useSoberData();
+  const [loading, setLoading] = useState(false);
   const today = new Date();
   const currentStatus = getDayStatus(today);
   
   const handleSetStatus = (status: 'zero' | 'reset') => {
+    setLoading(true);
     setDayStatus(today, status);
+    // Adding a small delay to show loading state for better feedback
+    setTimeout(() => setLoading(false), 300);
   };
   
   return (
@@ -26,28 +30,33 @@ const TodayTracker: React.FC = () => {
             </span>
           </p>
         )}
+        <p className="text-center text-sm mt-2">
+          Current streak: <span className="font-medium">{currentStreak}</span> days
+        </p>
       </div>
       <div className="flex gap-4">
         <Button
           onClick={() => handleSetStatus('zero')}
+          disabled={loading}
           className={`flex-1 py-5 transition-all font-medium rounded-lg ${
             currentStatus === 'zero'
               ? 'bg-[#16b3d7] text-black hover:bg-[#14a1c5]'
               : 'bg-[#18C5ED] text-black hover:bg-[#16b3d7]'
           }`}
         >
-          Zero Day
+          {loading ? 'Updating...' : 'Zero Day'}
         </Button>
         
         <Button
           onClick={() => handleSetStatus('reset')}
+          disabled={loading}
           className={`flex-1 py-5 transition-all font-medium rounded-lg ${
             currentStatus === 'reset'
               ? 'bg-[#e60000] text-white hover:bg-[#cc0000]'
               : 'bg-[#FF0000] text-white hover:bg-[#e60000]'
           }`}
         >
-          Reset Day
+          {loading ? 'Updating...' : 'Reset Day'}
         </Button>
       </div>
     </div>
