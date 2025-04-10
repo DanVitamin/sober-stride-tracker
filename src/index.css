@@ -48,6 +48,15 @@
   }
 }
 
+/* Zero app styles */
+.zero-gradient-bg {
+  @apply bg-gradient-to-br from-zero-bg-primary to-zero-bg-secondary;
+}
+
+.zero-card {
+  @apply rounded-xl p-6 shadow-lg backdrop-blur-sm bg-zero-ui-card border border-zero-ui-border;
+}
+
 .calendar-day {
   aspect-ratio: 1;
   position: relative;
@@ -64,4 +73,15 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
+}
+
+/* Circle progress */
+.circle-progress {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.circle-progress circle {
+  stroke-dasharray: var(--percent) 289.02652413026095;
+  transition: stroke-dasharray 1.5s ease;
 }

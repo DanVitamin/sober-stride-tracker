@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -89,6 +88,27 @@ export default {
                     900: '#4c1d95',
                     950: '#2e1065',
                 },
+				zero: {
+					bg: {
+						primary: '#2951CF',
+						secondary: '#1E3FA3',
+						dark: '#1A2F7A'
+					},
+					accent: {
+						primary: '#4475FD',
+						reset: '#FF5252'
+					},
+					text: {
+						primary: '#FFFFFF',
+						secondary: 'rgba(255, 255, 255, 0.8)',
+						muted: 'rgba(255, 255, 255, 0.6)'
+					},
+					ui: {
+						card: 'rgba(255, 255, 255, 0.12)',
+						border: 'rgba(255, 255, 255, 0.15)',
+						hover: 'rgba(255, 255, 255, 0.2)'
+					}
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -115,12 +135,17 @@ export default {
                 'pulse-gentle': {
                     '0%, 100%': { opacity: '1' },
                     '50%': { opacity: '0.8' }
-                }
+                },
+				'circle-progress': {
+					'0%': { strokeDasharray: '0 289.02652413026095' },
+					'100%': { strokeDasharray: 'var(--percent) 289.02652413026095' }
+				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-                'pulse-gentle': 'pulse-gentle 2s ease-in-out infinite'
+                'pulse-gentle': 'pulse-gentle 2s ease-in-out infinite',
+				'circle-progress': 'circle-progress 1.5s ease-in-out forwards'
 			}
 		}
 	},
