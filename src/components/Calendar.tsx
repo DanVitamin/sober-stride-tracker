@@ -135,22 +135,6 @@ const Calendar: React.FC = () => {
           
           {days.map((day, index) => {
             const inCurrentMonth = isCurrentMonth(day, currentMonth);
-            const status = getDayStatus(day);
-            const prevDay = index > 0 ? days[index - 1] : null;
-            const nextDay = index < days.length - 1 ? days[index + 1] : null;
-            
-            // Check for consecutive zero days to draw connector lines
-            const prevDayStatus = prevDay ? getDayStatus(prevDay) : null;
-            const nextDayStatus = nextDay ? getDayStatus(nextDay) : null;
-            const showLeftConnector = prevDayStatus === 'zero' && status === 'zero' && 
-                                    isCurrentMonth(day, currentMonth) && 
-                                    isCurrentMonth(prevDay, currentMonth) &&
-                                    day.getDay() !== 0; // Not Sunday
-                                    
-            const showRightConnector = nextDayStatus === 'zero' && status === 'zero' && 
-                                     isCurrentMonth(day, currentMonth) && 
-                                     isCurrentMonth(nextDay, currentMonth) && 
-                                     day.getDay() !== 6; // Not Saturday
             
             if (!inCurrentMonth) {
               return <div key={day.toString()} className="aspect-square" />;
@@ -166,19 +150,6 @@ const Calendar: React.FC = () => {
                 >
                   {formatDay(day)}
                 </button>
-                
-                {/* Streak connector lines */}
-                {status === 'zero' && showLeftConnector && (
-                  <div className="absolute left-0 top-1/2 h-1.5 transform -translate-y-1/2 bg-zero-text-primary shadow-sm" 
-                    style={{ width: 'calc(50% - 4px)', zIndex: 0 }}>
-                  </div>
-                )}
-                
-                {status === 'zero' && showRightConnector && (
-                  <div className="absolute right-0 top-1/2 h-1.5 transform -translate-y-1/2 bg-zero-text-primary shadow-sm" 
-                    style={{ width: 'calc(50% - 4px)', zIndex: 0 }}>
-                  </div>
-                )}
               </div>
             );
           })}
