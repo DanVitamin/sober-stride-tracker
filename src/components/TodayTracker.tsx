@@ -23,13 +23,15 @@ const TodayTracker: React.FC = () => {
         <h3 className="text-lg font-medium text-center">
           {format(today, 'EEEE, MMMM d')} - Today
         </h3>
-        {currentStatus && (
-          <p className="text-center text-sm mt-1 text-zero-text-secondary">
-            Current status: <span className={currentStatus === 'zero' ? 'text-[#18C5ED]' : 'text-[#FF0000]'}>
+        <p className="text-center text-sm mt-1 text-zero-text-secondary">
+          Current status: {currentStatus ? (
+            <span className={currentStatus === 'zero' ? 'text-[#18C5ED]' : 'text-[#FF0000]'}>
               {currentStatus === 'zero' ? 'Zero Day' : 'Reset Day'}
             </span>
-          </p>
-        )}
+          ) : (
+            <span className="text-yellow-400">Unknown</span>
+          )}
+        </p>
       </div>
       <div className="flex gap-4">
         <Button
