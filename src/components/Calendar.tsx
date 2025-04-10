@@ -62,9 +62,9 @@ const Calendar: React.FC = () => {
       classes += "text-zero-text-muted cursor-not-allowed ";
     } else {
       if (status === 'zero') {
-        classes += "bg-white text-zero-bg-primary hover:opacity-90 ";
+        classes += "bg-[#18C5ED] text-black hover:bg-[#16b3d7] ";
       } else if (status === 'reset') {
-        classes += "bg-zero-accent-reset text-white hover:opacity-90 ";
+        classes += "bg-[#FF0000] text-white hover:bg-[#e60000] ";
       } else {
         classes += "bg-zero-ui-card text-white hover:bg-zero-ui-hover ";
       }
@@ -108,11 +108,11 @@ const Calendar: React.FC = () => {
       {/* Calendar Legend */}
       <div className="flex gap-6 justify-center mb-6">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-white"></div>
+          <div className="w-3 h-3 rounded-full bg-[#18C5ED]"></div>
           <span className="text-sm text-zero-text-secondary">Zero Day</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-zero-accent-reset"></div>
+          <div className="w-3 h-3 rounded-full bg-[#FF0000]"></div>
           <span className="text-sm text-zero-text-secondary">Reset Day</span>
         </div>
       </div>
