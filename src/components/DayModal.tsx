@@ -38,7 +38,7 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
             onClick={() => handleSetStatus(null)}
             variant="ghost"
             size="icon"
-            className="rounded-full text-muted-foreground"
+            className="rounded-full text-muted-foreground hover:bg-zero-ui-hover"
             title="Remove entry"
           >
             <Trash2 size={18} />
@@ -49,10 +49,10 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
       <div className="flex gap-4 mt-4">
         <Button
           onClick={() => handleSetStatus('zero')}
-          className={`flex-1 py-5 transition-all font-medium rounded-lg ${
+          className={`flex-1 py-5 transition-all font-medium rounded-lg hover:opacity-90 ${
             currentStatus === 'zero'
               ? 'bg-transparent border border-zero-accent-primary text-zero-accent-primary'
-              : 'bg-zero-accent-primary text-black hover:bg-zero-accent-primary/80'
+              : 'bg-zero-accent-primary text-black'
           }`}
         >
           Zero Day
@@ -60,10 +60,10 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
         
         <Button
           onClick={() => handleSetStatus('reset')}
-          className={`flex-1 py-5 transition-all font-medium rounded-lg ${
+          className={`flex-1 py-5 transition-all font-medium rounded-lg hover:opacity-90 ${
             currentStatus === 'reset'
               ? 'bg-transparent border border-zero-accent-reset text-zero-accent-reset'
-              : 'bg-zero-accent-reset text-white hover:bg-zero-accent-reset/80'
+              : 'bg-zero-accent-reset text-white'
           }`}
         >
           Reset Day

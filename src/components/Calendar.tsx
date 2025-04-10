@@ -62,9 +62,9 @@ const Calendar: React.FC = () => {
       classes += "text-zero-text-muted cursor-not-allowed ";
     } else {
       if (status === 'zero') {
-        classes += "bg-white text-zero-bg-primary ";
+        classes += "bg-white text-zero-bg-primary hover:opacity-90 ";
       } else if (status === 'reset') {
-        classes += "bg-zero-accent-reset text-white ";
+        classes += "bg-zero-accent-reset text-white hover:opacity-90 ";
       } else {
         classes += "bg-zero-ui-card text-white hover:bg-zero-ui-hover ";
       }
