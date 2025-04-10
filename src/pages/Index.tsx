@@ -48,12 +48,12 @@ const Index = () => {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto py-6 md:py-10 px-4 md:px-6">
-        {/* Streak */}
+        {/* Streak - Made circle and text bigger */}
         <div className="flex flex-col items-center mb-8 md:mb-12">
-          <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-zero-bg-dark flex items-center justify-center">
+          <div className="w-56 h-56 md:w-64 md:h-64 rounded-full bg-zero-bg-dark flex items-center justify-center">
             <div className="text-center">
-              <div className="text-5xl md:text-7xl font-bold">{currentStreak}</div>
-              <div className="text-base md:text-lg text-zero-text-secondary">day streak</div>
+              <div className="text-6xl md:text-8xl font-bold">{currentStreak}</div>
+              <div className="text-lg md:text-xl text-zero-text-secondary">day streak</div>
             </div>
           </div>
           <p className="text-lg md:text-xl mt-6 md:mt-8 font-medium">
