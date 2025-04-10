@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,6 +19,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['Space Grotesk', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -90,13 +94,13 @@ export default {
                 },
 				zero: {
 					bg: {
-						primary: '#2951CF',
-						secondary: '#1E3FA3',
-						dark: '#1A2F7A'
+						primary: '#0000ff', // Updated to pure blue
+						secondary: '#0033cc', // Darker blue shade
+						dark: '#000099' // Even darker blue shade
 					},
 					accent: {
-						primary: '#4475FD',
-						reset: '#FF5252'
+						primary: '#3366ff', // Lighter blue
+						reset: '#FF5252' // Keep the reset color the same
 					},
 					text: {
 						primary: '#FFFFFF',
