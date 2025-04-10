@@ -52,7 +52,7 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
           className={`flex-1 py-5 transition-all font-medium rounded-lg ${
             currentStatus === 'zero'
               ? 'bg-transparent border border-zero-accent-primary text-zero-accent-primary'
-              : 'bg-zero-accent-primary text-black hover:opacity-90'
+              : 'bg-zero-accent-primary text-black hover:bg-zero-accent-primary/80'
           }`}
         >
           Zero Day
@@ -63,7 +63,7 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
           className={`flex-1 py-5 transition-all font-medium rounded-lg ${
             currentStatus === 'reset'
               ? 'bg-transparent border border-zero-accent-reset text-zero-accent-reset'
-              : 'bg-zero-accent-reset text-white hover:opacity-90'
+              : 'bg-zero-accent-reset text-white hover:bg-zero-accent-reset/80'
           }`}
         >
           Reset Day

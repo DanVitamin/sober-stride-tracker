@@ -2,6 +2,7 @@
 import React from 'react';
 import Calendar from '@/components/Calendar';
 import { Link } from 'react-router-dom';
+import Logo from '@/components/Logo';
 
 const CalendarPage = () => {
   return (
@@ -13,8 +14,9 @@ const CalendarPage = () => {
       <nav className="relative border-b border-zero-ui-border z-10">
         <div className="max-w-4xl mx-auto px-6 py-4">
           <div className="flex justify-between h-16 items-center">
-            <Link to="/" className="text-2xl font-bold">
-              zero
+            <Link to="/" className="flex items-center gap-2">
+              <Logo size="md" className="text-zero-text-primary" />
+              <span className="text-2xl font-bold">zero</span>
             </Link>
             <Link to="/">
               <button 

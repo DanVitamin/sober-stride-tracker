@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import Logo from './Logo';
 
 const Header: React.FC = () => {
   const { theme, setTheme } = useTheme();
@@ -14,9 +15,7 @@ const Header: React.FC = () => {
   return (
     <header className="w-full py-4 px-4 md:px-6 flex items-center justify-between border-b">
       <div className="flex items-center gap-2">
-        <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-          <span className="text-primary-foreground font-bold">S</span>
-        </div>
+        <Logo size="md" className="text-primary" />
         <h1 className="text-xl font-bold">Sober Stride</h1>
       </div>
       
