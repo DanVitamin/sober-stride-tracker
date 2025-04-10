@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Calendar } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import Logo from '@/components/Logo';
+import TodayTracker from '@/components/TodayTracker';
 
 const getMessage = (streak: number) => {
   const messages: Record<number | string, string> = {
@@ -79,6 +80,9 @@ const Index = () => {
             <div className="text-xs md:text-sm text-zero-text-muted">years zero</div>
           </div>
         </div>
+        
+        {/* Today's tracking */}
+        <TodayTracker />
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
 
 import React from 'react';
-import Calendar from '@/components/Calendar';
 import { Link } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { LineChart } from 'lucide-react';
+import DaysList from '@/components/DaysList';
 
 const CalendarPage = () => {
   const isMobile = useIsMobile();
@@ -32,7 +32,7 @@ const CalendarPage = () => {
 
       <div className="max-w-4xl mx-auto py-4 md:py-10 px-4 md:px-6 relative z-10">
         <section>
-          <Calendar />
+          <DaysList />
         </section>
       </div>
     </div>
