@@ -16,6 +16,7 @@ import {
   getPrevMonth,
   getDayLabels
 } from '@/utils/dateUtils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Calendar: React.FC = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -23,6 +24,7 @@ const Calendar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   const { getDayStatus } = useSoberData();
+  const isMobile = useIsMobile();
   
   const days = getCalendarDays(currentMonth);
   const dayLabels = getDayLabels();
@@ -80,8 +82,8 @@ const Calendar: React.FC = () => {
   };
 
   return (
-    <div className="zero-card">
-      <div className="flex justify-between items-center mb-6">
+    <div className="zero-card py-4 md:py-6 px-3 md:px-6">
+      <div className="flex justify-between items-center mb-3 md:mb-6">
         <Button
           variant="ghost"
           size="icon"
@@ -89,9 +91,9 @@ const Calendar: React.FC = () => {
           aria-label="Previous month"
           className="text-zero-text-primary hover:bg-zero-ui-hover"
         >
-          <ChevronLeft className="h-5 w-5" />
+          <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
         </Button>
-        <span className="text-xl font-medium">
+        <span className="text-lg md:text-xl font-medium">
           {formatMonthYear(currentMonth)}
         </span>
         <Button
@@ -101,19 +103,19 @@ const Calendar: React.FC = () => {
           aria-label="Next month"
           className="text-zero-text-primary hover:bg-zero-ui-hover"
         >
-          <ChevronRight className="h-5 w-5" />
+          <ChevronRight className="h-4 w-4 md:h-5 md:w-5" />
         </Button>
       </div>
       
       {/* Calendar Legend */}
-      <div className="flex gap-6 justify-center mb-6">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#18C5ED]"></div>
-          <span className="text-sm text-zero-text-secondary">Zero Day</span>
+      <div className="flex gap-4 md:gap-6 justify-center mb-3 md:mb-6">
+        <div className="flex items-center gap-1 md:gap-2">
+          <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#18C5ED]"></div>
+          <span className="text-xs md:text-sm text-zero-text-secondary">Zero Day</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#FF0000]"></div>
-          <span className="text-sm text-zero-text-secondary">Reset Day</span>
+        <div className="flex items-center gap-1 md:gap-2">
+          <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#FF0000]"></div>
+          <span className="text-xs md:text-sm text-zero-text-secondary">Reset Day</span>
         </div>
       </div>
       
@@ -122,9 +124,9 @@ const Calendar: React.FC = () => {
           {dayLabels.map((label) => (
             <div
               key={label}
-              className="text-center font-medium text-sm py-2 text-zero-text-secondary"
+              className="text-center font-medium text-xs md:text-sm py-1 md:py-2 text-zero-text-secondary"
             >
-              {label}
+              {isMobile ? label.charAt(0) : label}
             </div>
           ))}
           
