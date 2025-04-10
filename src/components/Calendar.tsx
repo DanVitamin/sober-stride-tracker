@@ -61,7 +61,7 @@ const Calendar: React.FC = () => {
       return "opacity-30";
     }
     
-    let classes = "aspect-square rounded-lg flex items-center justify-center font-medium border transition-all shadow-sm ";
+    let classes = "w-full h-full aspect-square rounded-lg flex items-center justify-center font-medium border transition-all shadow-sm ";
     
     if (inFuture) {
       classes += "border-zero-ui-border bg-opacity-20 text-zero-text-muted cursor-not-allowed ";
