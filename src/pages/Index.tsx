@@ -3,6 +3,7 @@ import React from 'react';
 import { useSoberData } from '@/context/SoberContext';
 import { Link } from 'react-router-dom';
 import { Calendar } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const getMessage = (streak: number) => {
   const messages: Record<number | string, string> = {
@@ -18,6 +19,7 @@ const getMessage = (streak: number) => {
 
 const Index = () => {
   const { currentStreak, bestStreak, totalMonths, totalYears } = useSoberData();
+  const isMobile = useIsMobile();
   
   return (
     <div className="min-h-screen relative overflow-hidden zero-gradient-bg text-zero-text-primary">
@@ -58,8 +60,8 @@ const Index = () => {
           </p>
         </div>
         
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        {/* Stats Cards - always show in a row, even on mobile */}
+        <div className="grid grid-cols-3 gap-2 sm:gap-6 mb-10">
           <div className="zero-card text-center">
             <div className="text-lg font-semibold mb-1">Best Streak</div>
             <div className="text-3xl font-bold">{bestStreak}</div>
