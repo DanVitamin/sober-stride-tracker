@@ -72,10 +72,10 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
           <Button
             onClick={() => handleSetStatus('zero')}
             variant={currentStatus === 'zero' ? "outline" : "default"}
-            className={`flex-1 py-6 border-2 transition-all font-semibold rounded-lg
+            className={`flex-1 py-6 border-2 transition-all font-semibold rounded-lg bg-opacity-90
               ${currentStatus === 'zero' 
-                ? 'border-primary bg-transparent text-primary' 
-                : 'border-primary bg-primary text-primary-foreground hover:bg-transparent hover:text-primary'
+                ? 'border-zero-accent-primary bg-transparent text-zero-accent-primary' 
+                : 'border-zero-accent-primary bg-zero-accent-primary text-primary-foreground hover:bg-transparent hover:text-zero-accent-primary'
               }`}
           >
             Zero Day
@@ -84,10 +84,10 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
           <Button
             onClick={() => handleSetStatus('reset')}
             variant={currentStatus === 'reset' ? "outline" : "destructive"}
-            className={`flex-1 py-6 border-2 transition-all font-semibold rounded-lg
+            className={`flex-1 py-6 border-2 transition-all font-semibold rounded-lg bg-opacity-90
               ${currentStatus === 'reset' 
-                ? 'border-destructive bg-transparent text-destructive' 
-                : 'border-destructive bg-destructive text-destructive-foreground hover:bg-transparent hover:text-destructive'
+                ? 'border-zero-accent-reset bg-transparent text-zero-accent-reset' 
+                : 'border-zero-accent-reset bg-zero-accent-reset text-white hover:bg-transparent hover:text-zero-accent-reset'
               }`}
           >
             Reset Day

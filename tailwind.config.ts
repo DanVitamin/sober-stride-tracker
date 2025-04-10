@@ -94,13 +94,13 @@ export default {
                 },
 				zero: {
 					bg: {
-						primary: '#0000ff', // Updated to pure blue
+						primary: '#0000ff', // Pure blue
 						secondary: '#0033cc', // Darker blue shade
 						dark: '#000099' // Even darker blue shade
 					},
 					accent: {
-						primary: '#3366ff', // Lighter blue
-						reset: '#FF5252' // Keep the reset color the same
+						primary: '#1EAEDB', // Updated brighter blue for calendar pop-up
+						reset: '#F97316' // Updated to a bolder orange-red
 					},
 					text: {
 						primary: '#FFFFFF',

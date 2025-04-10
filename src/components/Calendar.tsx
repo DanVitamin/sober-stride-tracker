@@ -67,7 +67,7 @@ const Calendar: React.FC = () => {
       classes += "border-zero-ui-border bg-opacity-20 text-zero-text-muted cursor-not-allowed ";
     } else {
       if (status === 'zero') {
-        classes += "bg-zero-text-primary text-zero-bg-primary border-zero-text-primary hover:bg-zero-text-primary/90 ";
+        classes += "bg-zero-accent-primary text-zero-bg-primary border-zero-accent-primary hover:bg-zero-accent-primary/90 ";
       } else if (status === 'reset') {
         classes += "bg-zero-accent-reset text-zero-text-primary border-zero-accent-reset hover:bg-zero-accent-reset/90 ";
       } else {
@@ -113,7 +113,7 @@ const Calendar: React.FC = () => {
       {/* Calendar Legend */}
       <div className="flex gap-6 justify-center mb-6">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-zero-text-primary"></div>
+          <div className="w-3 h-3 rounded-full bg-zero-accent-primary"></div>
           <span className="text-sm text-zero-text-secondary">Zero Day</span>
         </div>
         <div className="flex items-center gap-2">
@@ -195,8 +195,8 @@ const Calendar: React.FC = () => {
               }}
               className={`flex-1 py-3.5 rounded-lg font-semibold shadow-md transition-all
                 ${getDayStatus(selectedDate) === 'zero' 
-                  ? 'border-2 border-zero-text-primary bg-transparent text-zero-text-primary' 
-                  : 'bg-zero-text-primary text-zero-bg-primary hover:bg-zero-text-primary/90'
+                  ? 'border-2 border-zero-accent-primary bg-transparent text-zero-accent-primary' 
+                  : 'bg-zero-accent-primary text-zero-bg-primary hover:bg-zero-accent-primary/90'
                 }`}
             >
               Zero Day
@@ -209,7 +209,7 @@ const Calendar: React.FC = () => {
               }}
               className={`flex-1 py-3.5 rounded-lg font-semibold shadow-md transition-all
                 ${getDayStatus(selectedDate) === 'reset'
-                  ? 'border-2 border-zero-accent-reset bg-transparent text-zero-text-primary'
+                  ? 'border-2 border-zero-accent-reset bg-transparent text-zero-accent-reset'
                   : 'bg-zero-accent-reset text-zero-text-primary hover:bg-zero-accent-reset/90'
                 }`}
             >
