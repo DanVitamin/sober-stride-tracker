@@ -37,10 +37,6 @@ const CalendarPage = () => {
           <Calendar />
         </section>
       </div>
-      
-      <footer className="py-2 md:py-4 text-center text-xs md:text-sm text-zero-text-muted border-t border-zero-ui-border">
-        <p>&copy; {new Date().getFullYear()} Zero Tracker</p>
-      </footer>
     </div>
   );
 };
