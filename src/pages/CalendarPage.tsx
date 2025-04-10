@@ -21,11 +21,10 @@ const CalendarPage = () => {
             <Logo size="md" className="text-zero-text-primary" />
             <Link to="/">
               <button 
-                className="flex items-center gap-1 md:gap-2 px-3 py-1.5 md:px-5 md:py-2.5 rounded-full transition-all font-semibold
-                  bg-zero-text-primary text-zero-bg-primary shadow-lg hover:opacity-90 text-sm md:text-base"
+                className="flex items-center justify-center p-2 rounded-full transition-all
+                  bg-zero-text-primary text-zero-bg-primary shadow-lg hover:opacity-90"
               >
-                <LineChart size={isMobile ? 16 : 20} />
-                <span>View Progress</span>
+                <LineChart size={isMobile ? 32 : 40} />
               </button>
             </Link>
           </div>
