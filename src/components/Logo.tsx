@@ -7,11 +7,11 @@ interface LogoProps {
 }
 
 const Logo: React.FC<LogoProps> = ({ className = '', size = 'md' }) => {
-  // Define size dimensions
+  // Define size dimensions - increased by 20% from original values
   const dimensions = {
-    sm: { fontSize: 'text-lg' },
-    md: { fontSize: 'text-xl' },
-    lg: { fontSize: 'text-2xl' },
+    sm: { fontSize: 'text-xl' },     // Was text-lg
+    md: { fontSize: 'text-2xl' },    // Was text-xl
+    lg: { fontSize: 'text-3xl' },    // Was text-2xl
   };
 
   const { fontSize } = dimensions[size];

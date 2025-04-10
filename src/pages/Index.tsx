@@ -1,9 +1,9 @@
-
 import React from 'react';
 import { useSoberData } from '@/context/SoberContext';
 import { Link } from 'react-router-dom';
 import { Calendar } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import Logo from '@/components/Logo';
 
 const getMessage = (streak: number) => {
   const messages: Record<number | string, string> = {
@@ -31,7 +31,7 @@ const Index = () => {
       <nav className="relative z-10 border-b border-zero-ui-border">
         <div className="max-w-4xl mx-auto px-6 py-4">
           <div className="flex justify-between h-16 items-center">
-            <span className="text-2xl font-bold">zero</span>
+            <Logo size="md" className="text-zero-text-primary" />
             <Link to="/calendar">
               <button 
                 className="flex items-center gap-2 px-5 py-2.5 rounded-full transition-all font-semibold
