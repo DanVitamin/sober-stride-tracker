@@ -52,11 +52,11 @@
 
 /* Zero app styles */
 .zero-gradient-bg {
-  @apply bg-gradient-to-br from-zero-bg-primary to-zero-bg-secondary;
+  @apply bg-gradient-to-b from-zero-bg-primary to-zero-bg-secondary;
 }
 
 .zero-card {
-  @apply rounded-xl p-6 shadow-lg backdrop-blur-sm bg-zero-ui-card border border-zero-ui-border;
+  @apply rounded-xl p-6 bg-zero-ui-card border border-zero-ui-border;
 }
 
 .calendar-day {

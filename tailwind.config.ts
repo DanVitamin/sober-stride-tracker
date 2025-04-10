@@ -99,8 +99,8 @@ export default {
 						dark: '#000099' // Even darker blue shade
 					},
 					accent: {
-						primary: '#1EAEDB', // Updated brighter blue for calendar pop-up
-						reset: '#F97316' // Updated to a bolder orange-red
+						primary: '#1EAEDB', // Brighter blue for calendar
+						reset: '#F97316' // Orange-red
 					},
 					text: {
 						primary: '#FFFFFF',
@@ -108,9 +108,9 @@ export default {
 						muted: 'rgba(255, 255, 255, 0.6)'
 					},
 					ui: {
-						card: 'rgba(255, 255, 255, 0.12)',
-						border: 'rgba(255, 255, 255, 0.15)',
-						hover: 'rgba(255, 255, 255, 0.2)'
+						card: 'rgba(0, 0, 255, 0.08)', // Simplified card background
+						border: 'rgba(255, 255, 255, 0.1)', // Reduced border opacity
+						hover: 'rgba(255, 255, 255, 0.15)' // Simplified hover state
 					}
 				},
 			},

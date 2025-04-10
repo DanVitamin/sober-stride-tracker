@@ -38,11 +38,11 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="border border-muted bg-background text-foreground">
+      <DialogContent className="border-none bg-background text-foreground">
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between">
             <span>{formattedDate}</span>
-            {isToday && <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full">Today</span>}
+            {isToday && <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">Today</span>}
           </DialogTitle>
         </DialogHeader>
         
@@ -52,7 +52,7 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
               onClick={() => handleSetStatus(null)}
               variant="outline"
               size="icon"
-              className="p-2 hover:bg-primary/10 rounded-full text-destructive border border-destructive"
+              className="p-2 rounded-full text-muted-foreground border-muted"
               title="Remove entry"
             >
               <Trash2 size={20} />
@@ -62,7 +62,7 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
             onClick={onClose}
             variant="ghost"
             size="icon"
-            className="p-2 hover:bg-primary/10 rounded-full"
+            className="p-2 rounded-full"
           >
             <X size={20} />
           </Button>
@@ -72,10 +72,10 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
           <Button
             onClick={() => handleSetStatus('zero')}
             variant={currentStatus === 'zero' ? "outline" : "default"}
-            className={`flex-1 py-6 border-2 transition-all font-semibold rounded-lg bg-opacity-90
+            className={`flex-1 py-6 border transition-all font-semibold rounded-lg
               ${currentStatus === 'zero' 
                 ? 'border-zero-accent-primary bg-transparent text-zero-accent-primary' 
-                : 'border-zero-accent-primary bg-zero-accent-primary text-primary-foreground hover:bg-transparent hover:text-zero-accent-primary'
+                : 'border-zero-accent-primary bg-zero-accent-primary text-white'
               }`}
           >
             Zero Day
@@ -84,10 +84,10 @@ const DayModal: React.FC<DayModalProps> = ({ date, isOpen, onClose }) => {
           <Button
             onClick={() => handleSetStatus('reset')}
             variant={currentStatus === 'reset' ? "outline" : "destructive"}
-            className={`flex-1 py-6 border-2 transition-all font-semibold rounded-lg bg-opacity-90
+            className={`flex-1 py-6 border transition-all font-semibold rounded-lg
               ${currentStatus === 'reset' 
                 ? 'border-zero-accent-reset bg-transparent text-zero-accent-reset' 
-                : 'border-zero-accent-reset bg-zero-accent-reset text-white hover:bg-transparent hover:text-zero-accent-reset'
+                : 'border-zero-accent-reset bg-zero-accent-reset text-white'
               }`}
           >
             Reset Day
