@@ -1,5 +1,6 @@
+
 import { DayRecord, DayStatus } from '@/types/soberTypes';
-import { addDays, differenceInDays, differenceInMonths, differenceInYears, startOfDay } from 'date-fns';
+import { addDays, differenceInDays, differenceInMonths, differenceInYears, startOfDay, isBefore } from 'date-fns';
 
 interface StreakStats {
   currentStreak: number;
@@ -37,28 +38,28 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
     // Find if we have a record for this date
     const record = dayRecords.find(r => r.date.split('T')[0] === dateString);
     
-    // If no record exists for today, we can assume streak continues (we're not checking future dates)
-    // For past days, no record means streak is broken
-    if (differenceInDays(today, currentDate) > 0 && !record) {
-      streakBroken = true;
-    } 
-    // If the record exists but user reset, streak is broken
-    else if (record && record.status === 'reset') {
+    // If we find a reset day, the streak is broken
+    if (record && record.status === 'reset') {
       streakBroken = true;
     }
-    // Otherwise, either there's no record for today (which is fine) or they marked it as zero
-    else if (!record || record.status === 'zero') {
-      // Only count past days or today with 'zero' status in streak
-      if (record?.status === 'zero' || differenceInDays(today, currentDate) === 0) {
-        streak++;
-      }
+    // If it's a zero day, increase the streak
+    else if (record && record.status === 'zero') {
+      streak++;
+    }
+    // If no record exists and it's a past date (not today), break the streak
+    else if (!record && isBefore(currentDate, today)) {
+      streakBroken = true;
+    }
+    // For today with no record, we continue checking (no penalty for current day)
+    else if (!record && differenceInDays(today, currentDate) === 0) {
+      // Don't count today unless it's marked as zero
     }
     
     // Move to the previous day
     currentDate = addDays(currentDate, -1);
     
     // Safety check: don't go back more than 10000 days
-    if (streak > 10000) {
+    if (differenceInDays(currentDate, today) > 10000) {
       console.error("Infinite loop protection triggered in streak calculation");
       break;
     }
@@ -78,7 +79,6 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
   let longestStreakStartDate: Date | null = null;
   let longestStreakEndDate: Date | null = null;
 
-  // We need to handle consecutive days properly
   for (let i = 0; i < chronologicalRecords.length; i++) {
     const record = chronologicalRecords[i];
     const recordDate = new Date(record.date);
@@ -87,7 +87,8 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
       // First day of potential streak
       if (currentStrk === 0) {
         streakStartDate = recordDate;
-      } else if (currentStrk > 0) {
+        currentStrk = 1;
+      } else {
         // Check if this day is consecutive with the previous day
         const prevDate = new Date(chronologicalRecords[i - 1].date);
         const dayDiff = differenceInDays(recordDate, prevDate);
@@ -100,10 +101,6 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
           // Consecutive day, continue streak
           currentStrk++;
         }
-      } else {
-        // First day of streak
-        currentStrk = 1;
-        streakStartDate = recordDate;
       }
       
       // Update best streak if current one is better
@@ -119,22 +116,10 @@ export const calculateStreaks = (dayRecords: DayRecord[]): StreakStats => {
     }
   }
   
-  // If current streak is better than recorded best streak, update best streak
-  if (streak > bestStrk) {
-    bestStrk = streak;
-    // Calculate the start date of current streak
-    const currentStreakStartDate = addDays(today, -streak + 1);
-    longestStreakStartDate = currentStreakStartDate;
-    longestStreakEndDate = today;
-  }
-  
-  // Calculate total months and years from the best streak
-  let totalMonths = 0;
-  let totalYears = 0;
-  if (longestStreakStartDate && longestStreakEndDate && bestStrk > 0) {
-    totalMonths = Math.floor(differenceInMonths(longestStreakEndDate, longestStreakStartDate));
-    totalYears = Math.floor(differenceInYears(longestStreakEndDate, longestStreakStartDate));
-  }
+  // Calculate total months and years from zero days
+  let totalZeroDays = dayRecords.filter(r => r.status === 'zero').length;
+  let totalMonths = Math.floor(totalZeroDays / 30);
+  let totalYears = Math.floor(totalZeroDays / 365);
   
   return {
     currentStreak: streak,
