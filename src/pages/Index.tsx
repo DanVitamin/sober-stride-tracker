@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useSoberData } from '@/context/SoberContext';
 import { Link } from 'react-router-dom';
@@ -29,15 +30,15 @@ const Index = () => {
       
       {/* Header */}
       <nav className="relative z-10 border-b border-zero-ui-border">
-        <div className="max-w-4xl mx-auto px-6 py-4">
-          <div className="flex justify-between h-16 items-center">
-            <Logo size="md" className="text-zero-text-primary" />
+        <div className="max-w-4xl mx-auto px-4 md:px-6 py-2 md:py-4">
+          <div className="flex justify-between h-12 md:h-16 items-center">
+            <Logo size={isMobile ? "sm" : "md"} className="text-zero-text-primary" />
             <Link to="/calendar">
               <button 
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full transition-all font-semibold
-                  bg-zero-text-primary text-zero-bg-primary shadow-lg hover:opacity-90"
+                className="flex items-center gap-1 md:gap-2 px-3 py-1.5 md:px-5 md:py-2.5 rounded-full transition-all font-semibold
+                  bg-zero-text-primary text-zero-bg-primary shadow-lg hover:opacity-90 text-sm md:text-base"
               >
-                <Calendar size={20} />
+                <Calendar size={isMobile ? 16 : 20} />
                 <span>Track Days</span>
               </button>
             </Link>
@@ -46,43 +47,43 @@ const Index = () => {
       </nav>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto py-10 px-6">
+      <div className="max-w-4xl mx-auto py-6 md:py-10 px-4 md:px-6">
         {/* Streak */}
-        <div className="flex flex-col items-center mb-12">
-          <div className="w-56 h-56 rounded-full bg-zero-bg-dark flex items-center justify-center">
+        <div className="flex flex-col items-center mb-8 md:mb-12">
+          <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-zero-bg-dark flex items-center justify-center">
             <div className="text-center">
-              <div className="text-7xl font-bold">{currentStreak}</div>
-              <div className="text-lg text-zero-text-secondary">day streak</div>
+              <div className="text-5xl md:text-7xl font-bold">{currentStreak}</div>
+              <div className="text-base md:text-lg text-zero-text-secondary">day streak</div>
             </div>
           </div>
-          <p className="text-xl mt-8 font-medium">
+          <p className="text-lg md:text-xl mt-6 md:mt-8 font-medium">
             {getMessage(currentStreak)}
           </p>
         </div>
         
         {/* Stats Cards - always show in a row, even on mobile */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-6 mb-10">
-          <div className="zero-card text-center">
-            <div className="text-lg font-semibold mb-1">Best Streak</div>
-            <div className="text-3xl font-bold">{bestStreak}</div>
-            <div className="text-sm text-zero-text-muted">days</div>
+        <div className="grid grid-cols-3 gap-2 sm:gap-6 mb-8 md:mb-10">
+          <div className="zero-card text-center py-4 md:py-6 px-2 md:px-4">
+            <div className="text-base md:text-lg font-semibold mb-1">Best Streak</div>
+            <div className="text-2xl md:text-3xl font-bold">{bestStreak}</div>
+            <div className="text-xs md:text-sm text-zero-text-muted">days</div>
           </div>
           
-          <div className="zero-card text-center">
-            <div className="text-lg font-semibold mb-1">Total Months</div>
-            <div className="text-3xl font-bold">{totalMonths}</div>
-            <div className="text-sm text-zero-text-muted">months zero</div>
+          <div className="zero-card text-center py-4 md:py-6 px-2 md:px-4">
+            <div className="text-base md:text-lg font-semibold mb-1">Total Months</div>
+            <div className="text-2xl md:text-3xl font-bold">{totalMonths}</div>
+            <div className="text-xs md:text-sm text-zero-text-muted">months zero</div>
           </div>
           
-          <div className="zero-card text-center">
-            <div className="text-lg font-semibold mb-1">Total Years</div>
-            <div className="text-3xl font-bold">{totalYears}</div>
-            <div className="text-sm text-zero-text-muted">years zero</div>
+          <div className="zero-card text-center py-4 md:py-6 px-2 md:px-4">
+            <div className="text-base md:text-lg font-semibold mb-1">Total Years</div>
+            <div className="text-2xl md:text-3xl font-bold">{totalYears}</div>
+            <div className="text-xs md:text-sm text-zero-text-muted">years zero</div>
           </div>
         </div>
       </div>
       
-      <footer className="py-4 text-center text-sm text-zero-text-muted border-t border-zero-ui-border">
+      <footer className="py-2 md:py-4 text-center text-xs md:text-sm text-zero-text-muted border-t border-zero-ui-border">
         <p>&copy; {new Date().getFullYear()} Zero Tracker</p>
       </footer>
     </div>
