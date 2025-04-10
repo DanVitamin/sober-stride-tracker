@@ -7,7 +7,7 @@ interface LogoProps {
 }
 
 const Logo: React.FC<LogoProps> = ({ className = '', size = 'md' }) => {
-  // Define size dimensions with consistent values
+  // Define size dimensions with consistent values for all screen sizes
   const dimensions = {
     sm: { fontSize: 'text-xl' },
     md: { fontSize: 'text-2xl' },

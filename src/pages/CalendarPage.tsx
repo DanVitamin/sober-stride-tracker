@@ -18,7 +18,7 @@ const CalendarPage = () => {
       <nav className="relative border-b border-zero-ui-border z-10">
         <div className="max-w-4xl mx-auto px-4 md:px-6 py-2 md:py-4">
           <div className="flex justify-between h-12 md:h-16 items-center">
-            <Logo size={isMobile ? "sm" : "md"} className="text-zero-text-primary" />
+            <Logo size="md" className="text-zero-text-primary" />
             <Link to="/">
               <button 
                 className="flex items-center gap-1 md:gap-2 px-3 py-1.5 md:px-5 md:py-2.5 rounded-full transition-all font-semibold
