@@ -10,7 +10,7 @@ const CalendarPage = () => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="min-h-screen zero-gradient-bg text-zero-text-primary">
+    <div className="min-h-screen zero-gradient-bg text-zero-text-primary flex flex-col">
       {/* Decorative elements */}
       <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10 bg-white/10"></div>
       <div className="absolute bottom-20 left-10 w-96 h-96 rounded-full opacity-5 bg-white/10"></div>
@@ -32,13 +32,13 @@ const CalendarPage = () => {
         </div>
       </nav>
 
-      <div className="max-w-4xl mx-auto py-4 md:py-10 px-4 md:px-6 relative z-10">
+      <div className="max-w-4xl mx-auto py-4 md:py-10 px-4 md:px-6 relative z-10 flex-grow">
         <section>
           <Calendar />
         </section>
       </div>
       
-      <footer className="py-2 md:py-4 text-center text-xs md:text-sm text-zero-text-muted border-t border-zero-ui-border">
+      <footer className="py-2 md:py-4 text-center text-xs md:text-sm text-zero-text-muted border-t border-zero-ui-border mt-auto">
         <p>&copy; {new Date().getFullYear()} Zero Tracker</p>
       </footer>
     </div>

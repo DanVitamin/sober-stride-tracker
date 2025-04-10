@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useSoberData } from '@/context/SoberContext';
 import { Link } from 'react-router-dom';
@@ -22,7 +23,7 @@ const Index = () => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="min-h-screen relative overflow-hidden zero-gradient-bg text-zero-text-primary">
+    <div className="min-h-screen relative overflow-hidden zero-gradient-bg text-zero-text-primary flex flex-col">
       {/* Decorative elements */}
       <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10 bg-radial-white"></div>
       <div className="absolute bottom-20 left-10 w-96 h-96 rounded-full opacity-5 bg-radial-white"></div>
@@ -46,7 +47,7 @@ const Index = () => {
       </nav>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto py-6 md:py-10 px-4 md:px-6">
+      <div className="max-w-4xl mx-auto py-6 md:py-10 px-4 md:px-6 flex-grow">
         {/* Streak */}
         <div className="flex flex-col items-center mb-8 md:mb-12">
           <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-zero-bg-dark flex items-center justify-center">
@@ -82,7 +83,7 @@ const Index = () => {
         </div>
       </div>
       
-      <footer className="py-2 md:py-4 text-center text-xs md:text-sm text-zero-text-muted border-t border-zero-ui-border">
+      <footer className="py-2 md:py-4 text-center text-xs md:text-sm text-zero-text-muted border-t border-zero-ui-border mt-auto">
         <p>&copy; {new Date().getFullYear()} Zero Tracker</p>
       </footer>
     </div>
