@@ -55,7 +55,7 @@ const CalendarPage = () => {
               size="icon"
               onClick={handlePreviousMonth}
               aria-label="Previous month"
-              className="text-zero-text-primary hover:bg-zero-ui-hover"
+              className="text-zero-text-primary hover:bg-zero-ui-hover rounded-[5px]"
             >
               <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
             </Button>
@@ -71,7 +71,7 @@ const CalendarPage = () => {
                  currentMonth.getFullYear() === new Date().getFullYear())
               }
               aria-label="Next month"
-              className="text-zero-text-primary hover:bg-zero-ui-hover disabled:opacity-30"
+              className="text-zero-text-primary hover:bg-zero-ui-hover disabled:opacity-30 rounded-[5px]"
             >
               <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
             </Button>

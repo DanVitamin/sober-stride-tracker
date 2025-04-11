@@ -38,7 +38,7 @@ const DaysList: React.FC = () => {
           variant="ghost"
           size="icon"
           onClick={handlePrevious}
-          className="text-zero-text-primary hover:bg-zero-ui-hover"
+          className="text-zero-text-primary hover:bg-zero-ui-hover rounded-[5px]"
         >
           <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
         </Button>
@@ -48,7 +48,7 @@ const DaysList: React.FC = () => {
           size="icon"
           onClick={handleNext}
           disabled={offset === 0}
-          className={`text-zero-text-primary ${offset === 0 ? 'opacity-50' : 'hover:bg-zero-ui-hover'}`}
+          className={`text-zero-text-primary rounded-[5px] ${offset === 0 ? 'opacity-50' : 'hover:bg-zero-ui-hover'}`}
         >
           <ChevronRight className="h-4 w-4 md:h-5 md:w-5" />
         </Button>
@@ -62,7 +62,7 @@ const DaysList: React.FC = () => {
           return (
             <div 
               key={day.toString()} 
-              className={`flex items-center rounded-lg p-2 md:p-3 border border-zero-ui-border ${
+              className={`flex items-center rounded-[5px] p-2 md:p-3 border border-zero-ui-border ${
                 isToday ? 'bg-zero-bg-dark' : ''
               }`}
             >
@@ -72,7 +72,7 @@ const DaysList: React.FC = () => {
                     {format(day, 'E, MMM d')}
                   </span>
                   {isToday && (
-                    <span className="ml-2 text-xs bg-zero-ui-border px-2 py-0.5 rounded-full">
+                    <span className="ml-2 text-xs bg-zero-ui-border px-2 py-0.5 rounded-[5px]">
                       Today
                     </span>
                   )}
@@ -87,7 +87,7 @@ const DaysList: React.FC = () => {
               <div className="flex gap-2">
                 <button
                   onClick={() => handleSetStatus(day, 'zero')}
-                  className={`w-12 md:w-16 h-8 md:h-10 rounded transition-colors ${
+                  className={`w-12 md:w-16 h-8 md:h-10 rounded-[5px] transition-colors ${
                     status === 'zero'
                       ? 'bg-[#16b3d7]'
                       : 'bg-[#18C5ED] hover:bg-[#16b3d7]'
@@ -100,7 +100,7 @@ const DaysList: React.FC = () => {
                 
                 <button
                   onClick={() => handleSetStatus(day, 'reset')}
-                  className={`w-12 md:w-16 h-8 md:h-10 rounded transition-colors ${
+                  className={`w-12 md:w-16 h-8 md:h-10 rounded-[5px] transition-colors ${
                     status === 'reset'
                       ? 'bg-[#e60000]'
                       : 'bg-[#FF0000] hover:bg-[#e60000]'

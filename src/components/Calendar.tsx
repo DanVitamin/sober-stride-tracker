@@ -50,7 +50,7 @@ const Calendar: React.FC<CalendarProps> = ({ selectedMonth }) => {
       return "opacity-30";
     }
     
-    let classes = "w-full h-full rounded-lg flex items-center justify-center transition-colors ";
+    let classes = "w-full h-full rounded-[5px] flex items-center justify-center transition-colors ";
     
     if (inFuture) {
       classes += "text-zero-text-muted cursor-not-allowed opacity-50 ";

@@ -40,7 +40,7 @@ const TodayTracker: React.FC = () => {
         <Button
           onClick={() => handleSetStatus('zero')}
           disabled={loading}
-          className={`flex-1 py-5 transition-all font-medium rounded-lg ${
+          className={`flex-1 py-5 transition-all font-medium rounded-[5px] ${
             currentStatus === 'zero'
               ? 'bg-[#16b3d7] text-black hover:bg-[#14a1c5]'
               : 'bg-[#18C5ED] text-black hover:bg-[#16b3d7]'
@@ -52,7 +52,7 @@ const TodayTracker: React.FC = () => {
         <Button
           onClick={() => handleSetStatus('reset')}
           disabled={loading}
-          className={`flex-1 py-5 transition-all font-medium rounded-lg ${
+          className={`flex-1 py-5 transition-all font-medium rounded-[5px] ${
             currentStatus === 'reset'
               ? 'bg-[#e60000] text-white hover:bg-[#cc0000]'
               : 'bg-[#FF0000] text-white hover:bg-[#e60000]'

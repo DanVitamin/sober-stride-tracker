@@ -35,7 +35,7 @@
     --input: 0 0% 20%;
     --ring: 0 0% 100%;
 
-    --radius: 0.75rem;
+    --radius: 0.3125rem; /* 5px */
   }
 }
 
@@ -56,7 +56,7 @@
 }
 
 .zero-card {
-  @apply rounded-xl p-6 bg-zero-ui-card border border-zero-ui-border;
+  @apply rounded-[5px] p-6 bg-zero-ui-card border border-zero-ui-border;
 }
 
 .calendar-day {
