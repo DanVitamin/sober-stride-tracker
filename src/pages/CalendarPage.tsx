@@ -32,12 +32,13 @@ const CalendarPage = () => {
       <div className="absolute bottom-20 left-10 w-96 h-96 rounded-full opacity-5 bg-white/10"></div>
       
       <nav className="relative border-b border-zero-ui-border z-10">
-        <div className="max-w-4xl mx-auto px-4 md:px-6 py-2 md:py-4">
+        <div className="max-w-4xl mx-auto px-6 md:px-8 py-2 md:py-4">
           <div className="flex justify-between h-12 md:h-16 items-center">
             <Logo size="md" className="text-zero-text-primary" />
             <Link to="/">
               <button 
                 className="flex items-center justify-center transition-all hover:opacity-80"
+                aria-label="Go to home page"
               >
                 <LineChart size={isMobile ? 26 : 32} color="#FFFFFF" />
               </button>
@@ -46,7 +47,7 @@ const CalendarPage = () => {
         </div>
       </nav>
 
-      <div className="max-w-4xl mx-auto py-4 md:py-10 px-4 md:px-6 relative z-10">
+      <div className="max-w-4xl mx-auto py-4 md:py-10 px-6 md:px-8 relative z-10">
         <section className="w-full">
           {/* Month Navigation */}
           <div className="flex justify-between items-center mb-4 md:mb-6 px-0 md:px-2">

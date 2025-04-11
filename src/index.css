@@ -35,7 +35,7 @@
     --input: 0 0% 20%;
     --ring: 0 0% 100%;
 
-    --radius: 0.3125rem; /* 5px */
+    --radius: 0.3125rem; /* Exactly 5px */
   }
 }
 

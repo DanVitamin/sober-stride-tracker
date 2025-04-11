@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useSoberData } from '@/context/SoberContext';
 import { Link } from 'react-router-dom';
@@ -31,12 +30,13 @@ const Index = () => {
       
       {/* Header */}
       <nav className="relative z-10 border-b border-zero-ui-border">
-        <div className="max-w-4xl mx-auto px-4 md:px-6 py-2 md:py-4">
+        <div className="max-w-4xl mx-auto px-6 md:px-8 py-2 md:py-4">
           <div className="flex justify-between h-12 md:h-16 items-center">
             <Logo size="md" className="text-zero-text-primary" />
             <Link to="/calendar">
               <button 
                 className="flex items-center justify-center transition-all hover:opacity-80"
+                aria-label="Go to calendar view"
               >
                 <Calendar size={isMobile ? 26 : 32} color="#FFFFFF" />
               </button>
@@ -46,7 +46,7 @@ const Index = () => {
       </nav>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto py-6 md:py-10 px-4 md:px-6">
+      <div className="max-w-4xl mx-auto py-6 md:py-10 px-6 md:px-8">
         {/* Streak - Made circle and text bigger */}
         <div className="flex flex-col items-center mb-8 md:mb-12">
           <div className="w-56 h-56 md:w-64 md:h-64 rounded-full bg-zero-bg-dark flex items-center justify-center">
