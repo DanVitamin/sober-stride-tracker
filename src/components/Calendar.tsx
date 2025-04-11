@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { DayStatus, useSoberData } from '@/context/SoberContext';
 import DayModal from './DayModal';
 import {
@@ -12,30 +11,23 @@ import {
   isDateToday,
   isDateInFuture,
   formatDay,
-  getNextMonth,
-  getPrevMonth,
   getDayLabels
 } from '@/utils/dateUtils';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-const Calendar: React.FC = () => {
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+interface CalendarProps {
+  selectedMonth: Date;
+}
+
+const Calendar: React.FC<CalendarProps> = ({ selectedMonth }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   const { getDayStatus } = useSoberData();
   const isMobile = useIsMobile();
   
-  const days = getCalendarDays(currentMonth);
+  const days = getCalendarDays(selectedMonth);
   const dayLabels = getDayLabels();
-  
-  const handlePreviousMonth = () => {
-    setCurrentMonth(getPrevMonth(currentMonth));
-  };
-  
-  const handleNextMonth = () => {
-    setCurrentMonth(getNextMonth(currentMonth));
-  };
   
   const handleDayClick = (day: Date) => {
     if (isDateInFuture(day)) return;
@@ -51,7 +43,7 @@ const Calendar: React.FC = () => {
   const getDayClass = (day: Date): string => {
     const status = getDayStatus(day);
     const isToday = isDateToday(day);
-    const inCurrentMonth = isCurrentMonth(day, currentMonth);
+    const inCurrentMonth = isCurrentMonth(day, selectedMonth);
     const inFuture = isDateInFuture(day);
     
     if (!inCurrentMonth) {
@@ -61,7 +53,7 @@ const Calendar: React.FC = () => {
     let classes = "w-full h-full rounded-lg flex items-center justify-center transition-colors ";
     
     if (inFuture) {
-      classes += "text-zero-text-muted cursor-not-allowed ";
+      classes += "text-zero-text-muted cursor-not-allowed opacity-50 ";
     } else {
       if (status === 'zero') {
         classes += "bg-[#18C5ED] text-black hover:bg-[#16b3d7] ";
@@ -75,40 +67,16 @@ const Calendar: React.FC = () => {
     }
     
     if (isToday) {
-      classes += "ring-1 ring-white ";
+      classes += "ring-2 ring-white ";
     }
     
     return classes;
   };
 
   return (
-    <div className="zero-card py-4 md:py-6 px-3 md:px-6">
-      <div className="flex justify-between items-center mb-3 md:mb-6">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={handlePreviousMonth}
-          aria-label="Previous month"
-          className="text-zero-text-primary hover:bg-zero-ui-hover"
-        >
-          <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
-        </Button>
-        <span className="text-lg md:text-xl font-medium">
-          {formatMonthYear(currentMonth)}
-        </span>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={handleNextMonth}
-          aria-label="Next month"
-          className="text-zero-text-primary hover:bg-zero-ui-hover"
-        >
-          <ChevronRight className="h-4 w-4 md:h-5 md:w-5" />
-        </Button>
-      </div>
-      
+    <div className="zero-card py-4 md:py-6 px-3 md:px-6 w-full">
       {/* Calendar Legend */}
-      <div className="flex gap-4 md:gap-6 justify-center mb-3 md:mb-6">
+      <div className="flex gap-4 md:gap-6 justify-center mb-4 md:mb-6">
         <div className="flex items-center gap-1 md:gap-2">
           <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#18C5ED]"></div>
           <span className="text-xs md:text-sm text-zero-text-secondary">Zero Day</span>
@@ -120,7 +88,7 @@ const Calendar: React.FC = () => {
       </div>
       
       <CardContent className="p-0">
-        <div className="grid grid-cols-7 gap-1">
+        <div className="grid grid-cols-7 gap-1 md:gap-2">
           {dayLabels.map((label) => (
             <div
               key={label}
@@ -131,19 +99,20 @@ const Calendar: React.FC = () => {
           ))}
           
           {days.map((day) => {
-            const inCurrentMonth = isCurrentMonth(day, currentMonth);
+            const inCurrentMonth = isCurrentMonth(day, selectedMonth);
+            const inFuture = isDateInFuture(day);
             
             if (!inCurrentMonth) {
               return <div key={day.toString()} className="aspect-square" />;
             }
             
             return (
-              <div key={day.toString()} className="aspect-square p-0.5">
+              <div key={day.toString()} className="aspect-square p-0.5 md:p-1">
                 <button 
                   onClick={() => handleDayClick(day)}
                   className={getDayClass(day)}
-                  disabled={isDateInFuture(day)}
-                  aria-disabled={isDateInFuture(day)}
+                  disabled={inFuture}
+                  aria-disabled={inFuture}
                 >
                   {formatDay(day)}
                 </button>

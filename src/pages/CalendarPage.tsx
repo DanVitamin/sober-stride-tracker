@@ -1,13 +1,29 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { LineChart } from 'lucide-react';
-import DaysList from '@/components/DaysList';
+import { LineChart, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { format, addMonths, subMonths } from 'date-fns';
+import Calendar from '@/components/Calendar';
 
 const CalendarPage = () => {
   const isMobile = useIsMobile();
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  
+  const handleNextMonth = () => {
+    const nextMonth = addMonths(currentMonth, 1);
+    // Prevent navigating to future months beyond current month
+    if (nextMonth.getMonth() <= new Date().getMonth() || 
+        nextMonth.getFullYear() < new Date().getFullYear()) {
+      setCurrentMonth(nextMonth);
+    }
+  };
+  
+  const handlePreviousMonth = () => {
+    setCurrentMonth(subMonths(currentMonth, 1));
+  };
   
   return (
     <div className="min-h-screen zero-gradient-bg text-zero-text-primary">
@@ -31,8 +47,38 @@ const CalendarPage = () => {
       </nav>
 
       <div className="max-w-4xl mx-auto py-4 md:py-10 px-4 md:px-6 relative z-10">
-        <section>
-          <DaysList />
+        <section className="w-full">
+          {/* Month Navigation */}
+          <div className="flex justify-between items-center mb-4 md:mb-6 px-0 md:px-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handlePreviousMonth}
+              aria-label="Previous month"
+              className="text-zero-text-primary hover:bg-zero-ui-hover"
+            >
+              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
+            </Button>
+            <span className="text-xl md:text-2xl font-medium">
+              {format(currentMonth, 'MMMM yyyy')}
+            </span>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleNextMonth}
+              disabled={
+                (currentMonth.getMonth() === new Date().getMonth() && 
+                 currentMonth.getFullYear() === new Date().getFullYear())
+              }
+              aria-label="Next month"
+              className="text-zero-text-primary hover:bg-zero-ui-hover disabled:opacity-30"
+            >
+              <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
+            </Button>
+          </div>
+          
+          {/* Calendar Component */}
+          <Calendar selectedMonth={currentMonth} />
         </section>
       </div>
     </div>
